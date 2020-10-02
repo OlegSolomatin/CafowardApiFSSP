@@ -7,17 +7,45 @@ html
         link(rel='stylesheet', href='css/jjsonviewwer.css')
         link(rel='stylesheet', href='css/style.css')
     body
-        section Hello world
+        // заголовок
+        h1  Простая форма для проверки работы JSON
+        // делаем форму с полями ввода
+        p
+            input#name(type='text' placeholder='Ваше имя')
+            input#lastname(type='text' placeholder='и фамилия')
+            // по нажатию на эту кнопку данные уйдут на сервер
+            button(onclick='sendJSON()') Проверить JSON
+            // а вот тут они появятся снова, но уже после обработки сервером
+        p.result(style='color:blue')
+        p
+        script(src='js/jjsonviewer.js')
+        // скрипт, который обработает нажатие на кнопку и отправит данные на сервер
         script.
-            window.onload = function () {
-                var url = "https://api-ip.fssprus.ru/api/v1.0/search/physical?token=0iJ8kgQqCoTe&region=50&firstname=Олег&secondname=Соломатин&lastname=Игоревич&birthdate=26.06.1994";
-                var xhr = new XMLHttpRequest();
-                xhr.open("GET", url);
+            // эта функция сработает при нажатии на кнопку
+            function sendJSON() {
+                // с помощью jQuery обращаемся к элементам на странице по их именам
+                let name = document.querySelector('#name');
+                let lastname = document.querySelector('#lastname');
+                // а вот сюда мы поместим ответ от сервера
+                let result = document.querySelector('.result');
+                // создаём новый экземпляр запроса XHR
+                let xhr = new XMLHttpRequest();
+                // адрес, куда мы отправим нашу JSON-строку
+                let url = "https://support.pfumiko.ru/php/json.php";
+                // открываем соединение
+                xhr.open("POST", url, true);
+                // устанавливаем заголовок — выбираем тип контента, который отправится на сервер, в нашем случае мы явно пишем, что это JSON
+                xhr.setRequestHeader("Content-Type", "application/json");
+                // когда придёт ответ на наше обращение к серверу, мы его обработаем здесь
                 xhr.onreadystatechange = function () {
-                    if (xhr.readyState === 4) {
-                        console.log(xhr.status);
-                        console.log(xhr.responseText);
+                    // если запрос принят и сервер ответил, что всё в порядке
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        // выводим то, что ответил нам сервер — так мы убедимся, что данные он получил правильно
+                        result.innerHTML = this.responseText;
                     }
                 };
-                xhr.send();
-            };
+                // преобразуем наши данные JSON в строку
+                var data = JSON.stringify({"name": name.value, "lastname": lastname.value});
+                // когда всё готово, отправляем JSON на сервер
+                xhr.send(data);
+            }
