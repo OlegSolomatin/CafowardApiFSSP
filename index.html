@@ -1,0 +1,12 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>Api FSSP</title><link rel="stylesheet" href="css/jjsonviewwer.css"><link rel="stylesheet" href="css/style.css"></head><body><section>Hello world</section><script>window.onload = function () {
+    var url = "https://api-ip.fssprus.ru/api/v1.0/search/physical?token=0iJ8kgQqCoTe&region=50&firstname=Олег&secondname=Соломатин&lastname=Игоревич&birthdate=26.06.1994";
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", url);
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            console.log(xhr.status);
+            console.log(xhr.responseText);
+        }
+    };
+    xhr.send();
+};</script></body></html>

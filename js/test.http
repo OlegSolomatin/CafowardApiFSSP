@@ -1,0 +1,13 @@
+# For a quick start check out our HTTP Requests collection (Tools|HTTP Client|Open HTTP Requests Collection) or
+# paste cURL into the file and request will be converted to HTTP Request format.
+#
+# Following HTTP Request Live Templates are available:
+# * 'gtrp' and 'gtr' create a GET request with or without query parameters;
+# * 'ptr' and 'ptrp' create a POST request with a simple or parameter-like body;
+# * 'mtr' and 'fptr' create a POST request to submit a form with a text or file field (multipart/form-data);
+#GET https://api-ip.fssprus.ru/api/v1.0/search/physical?token=0iJ8kgQqCoTe&region=50&firstname=Олег&secondname=Соломатин&lastname=Игоревич&birthdate=26.06.1994
+
+###
+GET  https://api-ip.fssprus.ru/api/v1.0/result?token=0iJ8kgQqCoTe&task=dbe35f19-4e7a-45ce-b025-fbdb10f956bc
+
+###
